@@ -1,8 +1,8 @@
-CREATE DATABASE ultimate_fitnessAI;
+CREATE DATABASE IF NOT EXISTS ultimate_fitnessAI;
 USE ultimate_fitnessAI;
 
 -- Users Table
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE users (
 );
 
 -- Diet Plans Table
-CREATE TABLE diet_plans (
+CREATE TABLE IF NOT EXISTS diet_plans (
     id INT AUTO_INCREMENT PRIMARY KEY,
     type ENUM('veg', 'non-veg', 'jain', 'vegan') NOT NULL,
     day INT NOT NULL,
@@ -424,7 +424,7 @@ INSERT INTO diet_plans (type, day, meal_time, meal_name, ingredients, recipe, ca
 ('vegan', 100, 'Dinner', 'Vegan Dal Tadka', 'Lentils, Garlic, Spices', 'Step 1: Gather ingredients. Step 2: Prepare Vegan Dal Tadka with authentic spices. Step 3: Serve hot.', 658);
 
 -- Workouts Table
-CREATE TABLE workouts (
+CREATE TABLE IF NOT EXISTS workouts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     type ENUM('pilates', 'yoga', 'strength', 'cardio', 'abs', 'chest', 'back', 'bicep', 'tricep', 'glutes', 'core', 'pelvic', 'pcos') NOT NULL,
     day INT NOT NULL,
@@ -444,7 +444,7 @@ INSERT INTO workouts (type, day, exercise, sets, reps, duration) VALUES
 ('chest', 1, 'Cable Flys', 5, '15 reps', '7 min'),
 ('yoga', 2, 'Triangle Pose', 3, '12 reps', '10 min'),
 ('yoga', 2, 'Cobra Pose', 5, '10 reps', '7 min'),
-('yoga', 2, 'Child's Pose', 4, '9 reps', '10 min'),
+('yoga', 2, 'Childs Pose', 4, '9 reps', '10 min'),
 ('yoga', 2, 'Downward Dog', 4, '15 reps', '9 min'),
 ('yoga', 2, 'Bridge Pose', 5, '15 reps', '8 min'),
 ('yoga', 2, 'Warrior Pose', 4, '8 reps', '8 min'),
@@ -509,7 +509,7 @@ INSERT INTO workouts (type, day, exercise, sets, reps, duration) VALUES
 ('yoga', 11, 'Warrior Pose', 3, '8 reps', '9 min'),
 ('yoga', 11, 'Bridge Pose', 4, '12 reps', '8 min'),
 ('yoga', 11, 'Triangle Pose', 3, '12 reps', '9 min'),
-('yoga', 11, 'Child's Pose', 4, '10 reps', '10 min'),
+('yoga', 11, 'Childs Pose', 4, '10 reps', '10 min'),
 ('yoga', 11, 'Tree Pose', 5, '15 reps', '9 min'),
 ('yoga', 11, 'Downward Dog', 3, '13 reps', '8 min'),
 ('abs', 12, 'Russian Twists', 3, '11 reps', '9 min'),
@@ -1052,7 +1052,7 @@ INSERT INTO workouts (type, day, exercise, sets, reps, duration) VALUES
 ('bicep', 88, 'Barbell Curl', 3, '14 reps', '7 min'),
 ('bicep', 88, 'Chin-Ups', 3, '9 reps', '8 min'),
 ('yoga', 89, 'Warrior Pose', 3, '14 reps', '8 min'),
-('yoga', 89, 'Child's Pose', 4, '14 reps', '9 min'),
+('yoga', 89, 'Childs Pose', 4, '14 reps', '9 min'),
 ('yoga', 89, 'Bridge Pose', 3, '10 reps', '7 min'),
 ('yoga', 89, 'Cobra Pose', 3, '15 reps', '10 min'),
 ('yoga', 89, 'Downward Dog', 3, '8 reps', '9 min'),
@@ -1136,3 +1136,45 @@ INSERT INTO workouts (type, day, exercise, sets, reps, duration) VALUES
 ('chest', 100, 'Push-Ups', 4, '13 reps', '8 min'),
 ('chest', 100, 'Bench Press', 3, '15 reps', '10 min');
 
+CREATE TABLE IF NOT EXISTS shop_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    category VARCHAR(100) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    image_url VARCHAR(255) NOT NULL
+);
+
+
+-- Wellness Programs Table
+CREATE TABLE IF NOT EXISTS wellness_programs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    type VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL
+);
+
+-- Insert 10 Shop Items
+INSERT INTO shop_items (name, category, price, image_url) VALUES
+('Yoga Mat', 'Fitness Equipment', 19.99, 'assets/yoga_mat.jpg'),
+('Dumbbells Set', 'Strength Training', 49.99, 'assets/dumbbells.jpg'),
+('Resistance Bands', 'Pilates', 15.99, 'assets/bands.jpg'),
+('Protein Powder', 'Nutrition', 29.99, 'assets/protein.jpg'),
+('Treadmill', 'Cardio Equipment', 499.99, 'assets/treadmill.jpg'),
+('Kettlebell', 'Strength Training', 34.99, 'assets/kettlebell.jpg'),
+('Jump Rope', 'Cardio', 9.99, 'assets/jumprope.jpg'),
+('Exercise Bike', 'Cardio Equipment', 299.99, 'assets/bike.jpg'),
+('Foam Roller', 'Recovery', 24.99, 'assets/foamroller.jpg'),
+('Smartwatch', 'Wearable Tech', 199.99, 'assets/smartwatch.jpg');
+
+-- Insert 10 Wellness Programs
+INSERT INTO wellness_programs (name, type, description) VALUES
+('Guided Meditation', 'Mental Wellness', 'A 10-minute daily guided meditation.'),
+('Art Therapy', 'Creative Therapy', 'Express emotions through painting and drawing.'),
+('Music Relaxation', 'Mental Wellness', 'Calming instrumental music sessions.'),
+('Aromatherapy', 'Holistic Wellness', 'Using essential oils for relaxation.'),
+('Deep Breathing Exercises', 'Mental Wellness', 'Techniques to reduce stress and anxiety.'),
+('Mindful Walking', 'Outdoor Therapy', 'Walking with a meditative focus.'),
+('Sleep Optimization', 'Lifestyle Wellness', 'Techniques to improve sleep quality.'),
+('Hydration Coaching', 'Nutrition Wellness', 'Ensuring optimal daily hydration.'),
+('Posture Correction', 'Physical Wellness', 'Exercises to improve posture and prevent pain.'),
+('Self-Care Routines', 'Mental Wellness', 'Daily self-care practices for mental health.');
